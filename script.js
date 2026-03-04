@@ -3,6 +3,12 @@ const creatElement = (arr)=>{
   return  htmlElement.join(" ")
 }
 
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 const loadingSpinner =(status)=>{
    let spinner = document.getElementById('spinner')
    let wordContainer = document.getElementById('word-container')
@@ -80,7 +86,7 @@ const displayLevelWord=(words)=>{
        wordContainer.innerHTML=
         `
         <div class=" col-span-3  bangla-font space-y-5 text-center m-6 py-6">
-        <img class="mx-auto" src="./assets/alert-error.png" alt=""
+        <img class="mx-auto" src="./assets/alert-error.png" alt="">
   <p class="text-gray-500 text-2xl">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
   <h3 class=" text-4xl ">নেক্সট Lesson এ যান</h3>
 
@@ -101,7 +107,7 @@ const displayLevelWord=(words)=>{
   <p class="bangla-font font-medium text-2xl">${word.meaning?word.meaning:"Meaning Pawa Jayni"}</p>
   <div class="flex justify-between">
   <button  onclick="loadWordDetails(${word.id})" class="btn bg-gray-200 hover:bg-gray-400"><i class="fa-solid fa-circle-info"></i></button>
-  <button class="btn bg-gray-200 hover:bg-gray-400"><i class="fa-solid fa-volume-high"></i></button>
+  <button onclick="pronounceWord('${word.word}')" class="btn bg-gray-200 hover:bg-gray-400"><i class="fa-solid fa-volume-high"></i></button>
 </div>
 </div>
        `
@@ -129,3 +135,19 @@ const displayLevel = (levels)=>{
   }
 }
 levelContent()
+
+document.getElementById('btn-search').addEventListener("click",()=>{
+removeActive()
+    const input = document.getElementById('input-search')
+    const value = input.value.trim().toLowerCase()
+
+    fetch("https://openapi.programming-hero.com/api/words/all")
+    .then((res) => res.json())
+    .then((data) => {
+        const allWords = data.data
+        const filterWord = allWords.filter((word)=>
+        word.word.toLowerCase().includes(value)
+        )
+displayLevelWord(filterWord)
+    })
+})
