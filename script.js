@@ -1,3 +1,21 @@
+const creatElement = (arr)=>{
+    const htmlElement = arr.map((el)=> `<span class="btn">${el}</span>`)
+  return  htmlElement.join(" ")
+}
+
+const loadingSpinner =(status)=>{
+   let spinner = document.getElementById('spinner')
+   let wordContainer = document.getElementById('word-container')
+
+if (status== true) {
+    spinner.classList.remove('hidden')
+    wordContainer.classList.add('hidden')
+} else {
+      wordContainer.classList.remove('hidden')
+    spinner.classList.add('hidden')
+}
+}
+
 const levelContent = ()=>{
     fetch("https://openapi.programming-hero.com/api/levels/all")
     .then((res)=>res.json())
@@ -9,6 +27,7 @@ const removeActive =()=>{
 }
 
 const loadLevelWord=(id)=>{
+    loadingSpinner(true)
     const url = `https://openapi.programming-hero.com/api/level/${id}`
     fetch(url)
     .then((res)=>res.json())
@@ -33,8 +52,6 @@ const displayWordDetails = (word)=>{
     // console.log(word)
     const modalContainer = document.getElementById('modal-container')
     modalContainer.innerHTML=`
-  
-   
         <h1 class="font-bold text-2xl">${word.word}(<i class="fa-solid fa-microphone-lines"></i> :${word.pronunciation})</h1>
         <div>
           <h5 class="font-bold">Meaning</h5>
@@ -46,9 +63,7 @@ const displayWordDetails = (word)=>{
         </div>
         <div>
           <h5 class="font-bold">সমার্থক শব্দ গুলো</h5>
-          <button class="btn bg-blue-200">sync1</button>
-          <button class="btn bg-blue-200">sync1</button>
-          <button class="btn bg-blue-200">sync1</button>
+           <div class="">  ${creatElement(word.synonyms)}  </div>
         </div>
         <button class="btn btn-primary">Complete Learning</button>
       
@@ -72,6 +87,7 @@ const displayLevelWord=(words)=>{
 </div>
 
         `;
+        loadingSpinner(false)
         return
     }
 
@@ -90,7 +106,7 @@ const displayLevelWord=(words)=>{
 </div>
        `
        wordContainer.append(card)
-
+loadingSpinner(false)
     });
 }
 
@@ -109,6 +125,7 @@ const displayLevel = (levels)=>{
     `
 
     levelContainer.append(divBtn)
+
   }
 }
 levelContent()
