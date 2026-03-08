@@ -1,37 +1,19 @@
-# English Janala | Easy to Learn
+# English Janala | Practice Project
 
-English Janala is a web app designed to make learning English easier for Bengali speakers.  
-It provides interactive lessons with vocabulary, pronunciation, meanings, and example sentences.
+This is a practice project I built while learning web development.  
+It’s not fully functional yet, but it helped me explore key concepts like responsive design, API integration, and dynamic content rendering.
 
 ---
 
-## 🚀 Features
-- Responsive UI built with **Tailwind CSS** and **DaisyUI**
-- Vocabulary levels with interactive buttons
-- Word pronunciation using **SpeechSynthesis API**
-- Detailed word information (meaning, example, synonyms)
-- Search functionality to find words quickly
+## 🚀 What I Practiced
+- Tailwind CSS + DaisyUI for UI design
+- JavaScript (ES6+) for API calls and DOM manipulation
+- SpeechSynthesis API for word pronunciation
 - Modal-based word details display
 
 ---
 
-## 🛠️ Technologies Used
-- HTML5
-- CSS3 / Tailwind CSS / DaisyUI
-- JavaScript (ES6+)
-- Font Awesome Icons
-- Google Fonts
-- Programming Hero Open API
-
----
-
-## 📸 Screenshots
-![alt text](image-1.png) ,  
-![alt text](image-2.png) ,
-![alt text](image-3.png)
----
-
-## 📂 Project Setup
+## 📂 Setup
 1. Clone the repository:
    ```bash
    git clone https://github.com/taniashahida-dev/English-janala.git
